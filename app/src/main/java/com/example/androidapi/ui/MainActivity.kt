@@ -1,5 +1,6 @@
 package com.example.androidapi
 
+import com.example.androidapi.Uteis.Urlls
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -7,22 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
-import com.example.androidapi.network.configuration.EventsInterface
-import com.example.androidapi.network.configuration.RetrofitConfiguration
-import com.example.androidapi.network.configuration.ViewModelActiviy.FilmesViewModel
-import com.example.androidapi.network.configuration.model.FilmesResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.androidapi.ViewModelActiviy.FilmesViewModel
+import com.example.androidapi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    val urlBasic = "http://www.omdbapi.com"
+    val urls = Urlls
     private val filmesViewModel: FilmesViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        filmesViewModel.getFilmes(urlBasic)
+        filmesViewModel.getFilmes(urls.urlBasicDb)
 
     }
 
