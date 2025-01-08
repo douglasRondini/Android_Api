@@ -1,4 +1,4 @@
-package com.example.androidapi.network.configuration.model
+package com.example.androidapi.model
 
 import com.google.gson.annotations.SerializedName
 
